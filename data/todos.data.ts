@@ -25,6 +25,13 @@ export const UserData={
     PATCHED_TODO : {
         title: 'Patched todo title'
 
+    },
+
+    EXPECTED_TODO: {
+        id:        1,
+        userId:    1,
+        completed: false
+
     }
 
 
