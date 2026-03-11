@@ -1,14 +1,25 @@
 import {test, expect} from '@playwright/test'
 import {ApiHelper} from '../helpers/api.helpers'
 import {UserData} from '../data/todos.data'
+import { request } from 'node:http'
+
+
+
 
 
 // -tests--------------------------------------------------------
 
 test.describe('Todo API', () => {
 
+    let api: ApiHelper
+
+    test.beforeEach(async({request}) => {
+        api = new ApiHelper(request)
+
+    })
+
     test ('Get Todo List', async ({request}) => {
-    const api = new  ApiHelper(request)
+    
     const response = await api.getRequest(UserData.urls.todos)
     const body = await response.json()
 
@@ -18,7 +29,7 @@ test.describe('Todo API', () => {
 })
 
     test(`Get the details`, async({request}) => {
-    const api = new ApiHelper(request)
+    
     const response = await api.getRequest(UserData.urls.todoById(1))
     const body = await response.json()
     
@@ -36,7 +47,7 @@ test.describe('Todo API', () => {
 })
 
 test('Post/todos', async({request}) => {
-    const api = new ApiHelper(request)
+    
     const response = await api.postRequest(UserData.urls.todos, UserData.NEW_TODO)
 
     const body = await response.json()
@@ -49,7 +60,7 @@ test('Post/todos', async({request}) => {
 })
 
 test('Fully update a todo', async({request}) => {
-    const api = new ApiHelper(request)
+    
     const response = await api.putRequest(UserData.urls.todoById(1), UserData.UPDATED_TODO)
 
     const body = await response.json()
@@ -63,7 +74,7 @@ test('Fully update a todo', async({request}) => {
 
 test('Patch title', async({request}) => {
 
-    const api = new ApiHelper(request)
+    
     const response = await api.patchRequest(UserData.urls.todoById(1), UserData.PATCHED_TODO)
 
     const body = await response.json()
@@ -74,7 +85,7 @@ test('Patch title', async({request}) => {
 })
 
 test('Delete', async({request}) => {
-    const api = new ApiHelper(request)
+    
     const response = await api.deleteRequest(UserData.urls.todoById(1))
 
     
