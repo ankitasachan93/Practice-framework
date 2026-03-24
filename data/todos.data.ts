@@ -32,7 +32,15 @@ export const UserData={
         userId:    1,
         completed: false
 
-    }
+    },
+
+    VALID_TODO: [
+        { userId: 1, title: 'Buy groceries',  completed: false },
+        { userId: 2, title: 'Walk the dog',   completed: true  },
+        { userId: 3, title: 'Read a book',    completed: false },
+    ],
+
+    
 
 
 }

@@ -13,10 +13,11 @@ test.describe('Todo API', () => {
 
     let api: ApiHelper
 
-    test.beforeEach(async({request}) => {
+    
+    test.beforeEach(async ({request}) => {
         api = new ApiHelper(request)
-
     })
+
 
     test ('Get Todo List', async () => {
     
@@ -46,7 +47,7 @@ test.describe('Todo API', () => {
     
 })
 
-test('Post/todos', async() => {
+    test('Post/todos', async() => {
     
     const response = await api.postRequest(UserData.urls.todos, UserData.NEW_TODO)
 
@@ -59,7 +60,7 @@ test('Post/todos', async() => {
 
 })
 
-test('Fully update a todo', async() => {
+    test('Fully update a todo', async() => {
     
     const response = await api.putRequest(UserData.urls.todoById(1), UserData.UPDATED_TODO)
 
@@ -72,7 +73,7 @@ test('Fully update a todo', async() => {
 
 })
 
-test('Patch title', async() => {
+    test('Patch title', async() => {
 
     
     const response = await api.patchRequest(UserData.urls.todoById(1), UserData.PATCHED_TODO)
@@ -84,7 +85,7 @@ test('Patch title', async() => {
 
 })
 
-test('Delete', async() => {
+    test('Delete', async() => {
     
     const response = await api.deleteRequest(UserData.urls.todoById(1))
 
@@ -95,8 +96,24 @@ test('Delete', async() => {
 
 })
 
+UserData.VALID_TODO.forEach(({userId, title, completed}) => {
+    test(`test name with ${title}`, async() => {
+        const response = await api.postRequest(UserData.urls.todos, {userId, title, completed})
+        const body = await response.json()
+        expect(response.status()).toBe(201)
+        expect(body).toHaveProperty('id')
+        expect(body.title).toEqual(title)
+        expect(body.completed).toEqual(completed)
+        console.log(body)
+    })
+})
+
+
+
+
 
 })
+
 
 
 
