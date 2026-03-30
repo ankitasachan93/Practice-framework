@@ -10,22 +10,29 @@ test.describe("Login Tests",()=>{
     let loginPage: LoginPage    
 
     test.beforeEach(async({page}) =>{
-        loginPage = new LoginPage(page);
+        loginPage = new LoginPage(page);  //This calls the constructor of the LoginPage class and initializes the page and locators
         await loginPage.goto();
     })
-    test('Should Login Sucessfully', async({page}) =>{
-        
-        await loginPage.login(LoginData.Valid_User.email, LoginData.Valid_User.password)
-        await expect(page).toHaveURL(LoginData.EXPECTED.dashboardUrl)
-    })
+    
+   
 
-    LoginData.Invalid_User.forEach(({email, password, description}) =>{
-     test(`should fail with ${description}`, async({}) => {
-        await loginPage.login(email,password)
-        await expect(loginPage.errorMessage).toBeVisible
+       LoginData.Users.forEach(({username,password,type , description})=>{
+        test(`Login test - ${description ?? username}`,async({page}) => {
+            await loginPage.login(username,password)
+
+            if(type ==='valid'){
+                console.log(username)
+                await expect(page).toHaveURL(LoginData.Expected.dashboardUrl)
+                console.log(`test passed with ${username},${description}`)
+            }
+            else if(type === 'invalid'){
+                await expect(loginPage.errorMessage).toBeVisible()
+                console.log(`test failed with ${username},${description}`)
+            }
+            
 
 
-     })
+        })
 
     })
 
