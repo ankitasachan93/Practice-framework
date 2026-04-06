@@ -1,35 +1,26 @@
-import{ expect, Locator, Page} from '@playwright/test';
+import { Locator, Page } from '@playwright/test'
 
-export class InventoryPage{
-    readonly page :Page
-    readonly addtoCart : Locator
-    readonly cartLink : Locator
-    readonly addBikeLight: Locator
-    readonly cartBadge: Locator
+export class InventoryPage {
+    readonly page: Page  
+    readonly addButton: Locator
+    readonly cartLinks: Locator
 
 
-    constructor(page:Page){
-        this.page = page
-        this.addtoCart = page.locator('[data-test="add-to-cart-sauce-labs-backpack"]')
-        this.cartLink = page.locator('[data-test="shopping-cart-link"]')
-        this.addBikeLight = page.locator('[data-test="add-to-cart-sauce-labs-bike-light"]')
-        this.cartBadge    = page.locator('.shopping_cart_badge')
 
+    constructor(page: Page) {
+
+        this.page = page 
+        this.addButton = page.locator('[data-test="add-to-cart-sauce-labs-bike-light"]')
+        this.cartLinks = page.locator('.shopping_cart_link')
     }
 
-    async addToCart(){
-        await this.addtoCart.click()
+    async addtoCart() {
+       await this.addButton.click()
+     
     }
 
-    async cartlink(){
-        await this.cartLink.click()
-    }
-    async addMultipleItems() {                    
-        await this.addtoCart.click()
-        await this.addBikeLight.click()
-    }
-    async verifyCartCount(count: string) {        
-        await expect(this.cartBadge).toHaveText(count)
+    async gotoCart(){
+        await this.cartLinks.click()
     }
 
 

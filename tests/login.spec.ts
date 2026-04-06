@@ -1,40 +1,42 @@
-import{test, expect , Page} from '@playwright/test';
-import{LoginData} from '../data/login.data';
-import {LoginPage} from '../pages/LoginPage';
+import {expect, test} from '@playwright/test'
+import { LoginPage } from '../pages/LoginPage'
+import { LoginData } from '../data/login.data'
 
 
+test.describe('User Login', () =>{
 
+    let loginpage : LoginPage
 
-test.describe("Login Tests",()=>{
+test.beforeEach(async({page })=>{
+     loginpage = new LoginPage(page)
+     await loginpage.goto()
+})
 
-    let loginPage: LoginPage    
+LoginData.users.forEach(({username, password, type, description})=>{
+        test(`Login in with ${username}`, async({page})=>{
+            await loginpage.login(username,password)
 
-    test.beforeEach(async({page}) =>{
-        loginPage = new LoginPage(page);  //This calls the constructor of the LoginPage class and initializes the page and locators
-        await loginPage.goto();
+            if(type === 'valid'){
+                console.log(`${username} logged succesfully`)
+                 await expect(page).toHaveURL(LoginData.expected.dashboardUrl)
+            } else {
+                console.log(`${username}  ${description}`)
+                await expect(loginpage.errorMessage).toBeVisible()
+            }
+                 
+        })
     })
+
+
     
+})
+
    
 
-       LoginData.Users.forEach(({username,password,type , description})=>{
-        test(`Login test - ${description ?? username}`,async({page}) => {
-            await loginPage.login(username,password)
-
-            if(type ==='valid'){
-                console.log(username)
-                await expect(page).toHaveURL(LoginData.Expected.dashboardUrl)
-                console.log(`test passed with ${username},${description}`)
-            }
-            else if(type === 'invalid'){
-                await expect(loginPage.errorMessage).toBeVisible()
-                console.log(`test failed with ${username},${description}`)
-            }
-            
 
 
-        })
 
-    })
+    
 
 
-})
+        

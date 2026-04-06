@@ -1,39 +1,41 @@
-import{ test as base, expect} from '@playwright/test';
-import{ LoginPage} from '../pages/LoginPage';
-import{ InventoryPage} from '../pages/InventoryPage';
-import{ CheckoutPage} from '../pages/CheckoutPage';
-import{ CartPage} from '../pages/CartPage';
+import {test as base, expect} from '@playwright/test'
+import { LoginPage } from '../pages/LoginPage'
+import { CartPage } from '../pages/cartPage'
+import { CheckoutPage } from '../pages/checkoutPage'
+import { InventoryPage } from '../pages/InventoryPage'
 
-
-type MyFixtures ={
-    loginPage:LoginPage
-    inventoryPage:InventoryPage
-    checkoutPage:CheckoutPage
-    cartPage:CartPage
-
+type MyFixture = {
+    loginpage:LoginPage
+    cartpage:CartPage
+    checkoutpage:CheckoutPage
+    inventorypage:InventoryPage
 }
 
-export const test = base.extend<MyFixtures>({
-    loginPage : async({page}, use)=>{
-        const lp = new LoginPage(page)
-        await lp.goto()
-        await use(lp)
+export const test = base.extend<MyFixture>({
+
+    loginpage: async({page},use) =>{
+        const loginpage = new LoginPage(page)
+        await loginpage.goto()
+        await use(loginpage)
     },
 
-    inventoryPage :async({page}, use)=>{
-        const ip = new InventoryPage(page)
-        await use(new InventoryPage(page))
+    inventorypage:async({page}, use)=>{
+        const inventoryPage = new InventoryPage(page)
+        await use(inventoryPage)
     },
 
-    cartPage: async ({ page }, use) => {
-        await use(new CartPage(page))
+    checkoutpage:async({page},use)=>{
+        const checkoutpage = new CheckoutPage(page)
+        await use(checkoutpage)
     },
 
-    checkoutPage: async ({ page }, use) => {
-        await use(new CheckoutPage(page))
+    cartpage:async({page},use)=>{
+        const cartpage = new CartPage(page)
+        await use(cartpage)
     }
-
+     
+    
 
 })
 
-export {expect}
+export{expect}
