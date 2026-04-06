@@ -21,7 +21,7 @@ LoginData.users.forEach(({username, password, type, description})=>{
                  await expect(page).toHaveURL(LoginData.expected.dashboardUrl)
             } else {
                 console.log(`${username}  ${description}`)
-                await expect(loginpage.errorMessage).toBeVisible()
+                await expect(loginpage.errorMessage).toBeVisible()  //test CI/CD trigger
             }
                  
         })
