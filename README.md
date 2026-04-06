@@ -1,27 +1,21 @@
-# Playwright API Testing Framework
+# Playwright UI Testing POM Framework
 
-A professional API testing framework built with Playwright and TypeScript.
+A professional End to End flow testing framework built with Playwright and TypeScript.
 
-## 📁 Project Structure
+##  Project Structure
 ```
-├── helpers/          # Generic reusable HTTP request class
-├── data/             # Test data, payloads and URLs  
-├── tests/            # API test suites
-└── playwright.config.ts
+├── data/          # Data used in the test
+├── fixture       # Custom fixtures defined with page objects
+├── pages          # all the pages defined seperately with their locators    
+├── tests/            # UI test suites
+└── checkout.spec.ts
+└── login.spec.ts
+
 ```
 
-## ✅ Test Coverage
 
-| Method | Endpoint | What it tests |
-|--------|----------|---------------|
-| GET | /todos | Returns 200 todos |
-| GET | /todos/1 | Returns correct fields and values |
-| POST | /todos | Creates a new todo |
-| PUT | /todos/1 | Fully updates a todo |
-| PATCH | /todos/1 | Partially updates a todo |
-| DELETE | /todos/1 | Deletes a todo |
 
-## 🚀 How to Run
+##  How to Run
 ```bash
 # Install dependencies
 npm install
@@ -36,12 +30,22 @@ npx playwright test --headed
 npx playwright show-report
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Playwright
 - TypeScript
-- JSONPlaceholder API
-```
-**Once public your portfolio link will be:**
-```
+- Node.js
+- GitHub Actions
+
+
+## CI/CD Pipeline
+This framework uses GitHub Actions to run tests automatically on every push to main and on every pull request. The pipeline:
+- Installs Node.js and project dependencies
+- Installs Playwright browsers on a fresh Ubuntu machine
+- Runs the full test suite
+- Uploads an HTML test report as an artifact
+
+
+
+## Repository
 https://github.com/ankitasachan93/Practice-framework
