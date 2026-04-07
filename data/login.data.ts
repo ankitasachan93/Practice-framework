@@ -43,7 +43,7 @@ interface LoginDataType{
     username:"ocked_out_user",
     password:"secret",
     type: "invalid",
-    description:"Password is Invalid"
+    description:"User is Invalid"
 }],
     expected: {
         dashboardUrl: 'https://www.saucedemo.com/inventory.html'
