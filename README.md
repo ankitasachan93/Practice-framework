@@ -45,6 +45,15 @@ This framework uses GitHub Actions to run tests automatically on every push to m
 - Runs the full test suite
 - Uploads an HTML test report as an artifact
 
+## Environment Variables
+This framework uses environment variables for credentials.
+
+For local runs create a .env file in the project root:
+LOGIN_USERNAME=your_username
+LOGIN_PASSWORD=your_password
+
+For CI/CD add these as GitHub Secrets in your repository settings.
+
 
 
 ## Repository
