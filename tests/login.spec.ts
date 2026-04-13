@@ -18,10 +18,11 @@ LoginData.users.forEach(({username, password, type, description})=>{
 
             if(type === 'valid'){
                 console.log(`${username} logged succesfully`)
-                 await expect(page).toHaveURL(LoginData.expected.dashboardUrl)
+                 await expect(page).toHaveURL(LoginData.expected.dashboardUrl) //checking how the PR works in CI/CD pipeline testing
             } else {
                 console.log(`${username}  ${description}`)
                 await expect(loginpage.errorMessage).toBeVisible()  //test CI/CD trigger
+                console.log("Tested CI/CD trigger")
             }
                  
         })
