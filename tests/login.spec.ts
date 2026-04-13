@@ -22,7 +22,7 @@ LoginData.users.forEach(({username, password, type, description})=>{
             } else {
                 console.log(`${username}  ${description}`)
                 await expect(loginpage.errorMessage).toBeVisible()  //test CI/CD trigger
-                console.log("Tested CI/CD trigger")
+                
             }
                  
         })
