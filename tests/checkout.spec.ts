@@ -21,6 +21,28 @@ test.describe('End to End',()=>{
 
     })
 
+    test("checkout without cart item",async({page, loginpage,inventorypage,cartpage,checkoutpage})=>{
+        await loginpage.login(process.env.LOGIN_USERNAME!,process.env.LOGIN_PASSWORD!)
+        await expect(page).toHaveURL('/inventory.html')
+        await inventorypage.gotoCart()
+        await expect(page).toHaveURL('/cart.html')
+        await cartpage.goToCheckout()
+        await expect(page).toHaveURL('/checkout-step-one.html')
+        await checkoutpage.fillDetails('Ankita', 'Sachan', '110078')
+        await checkoutpage.clickContinue()
+        await expect(page).toHaveURL('/checkout-step-two.html')
+        await checkoutpage.clickFinish()
+        if(await page.getByRole('button', { name: 'Back Home' }).isVisible()){
+            console.log("Order placed without Item")
+        }else{
+            console.log("Order not placed because Cart was empty")
+        }
+
+
+
+
+
+    })
     
 
 })
