@@ -23,7 +23,7 @@ test.describe('End to End',()=>{
 
     test("checkout without cart item",async({page, loginpage,inventorypage,cartpage,checkoutpage})=>{
         await loginpage.login(process.env.LOGIN_USERNAME!,process.env.LOGIN_PASSWORD!)
-        await expect(page).toHaveURL('/inventory.html')
+        await expect(page).toHaveURL('/ntory.html')
         await inventorypage.gotoCart()
         await expect(page).toHaveURL('/cart.html')
         await cartpage.goToCheckout()
